@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "post": "git add . && git commit -m 'inCh' && git push -u origin master",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
