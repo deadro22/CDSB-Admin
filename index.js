@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/Pages"));
 
 mongoose.connect(
-  "mongodb+srv://CDSB:t4NH5vm2SKTMedTi@csdb-main-cluster.z2emz.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "mongodb+srv://CDSB:t4NH5vm2SKTMedTi@csdb-main-cluster.z2emz.mongodb.net/CDSB?retryWrites=true&w=majority",
   { useUnifiedTopology: true, useNewUrlParser: true },
   (err) => {
     if (err) throw err;
