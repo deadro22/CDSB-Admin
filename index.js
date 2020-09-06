@@ -52,10 +52,27 @@ const footMember = new mongoose.Schema({
 });
 const footMembers = mongoose.model("foot Members", footMember);
 
-app.get("/", protected, async (req, res) => {
+app.get("/marche", protected, async (req, res) => {
   const allMembers = await marcheMembers.find();
+  const marcheMembersCount = allMembers.length;
+  const fMembersCount = await footMembers.find().select("name");
+  const footMembersCount = fMembersCount.length;
   res.render(__dirname + "/Pages/home.ejs", {
     allMembers,
+    footMembersCount,
+    marcheMembersCount,
+  });
+});
+
+app.get("/foot", protected, async (req, res) => {
+  const allMembers = await footMembers.find();
+  const footMembersCount = allMembers.length;
+  const fMembersCount = await marcheMembers.find().select("name");
+  const marcheMembersCount = fMembersCount.length;
+  res.render(__dirname + "/Pages/foot.ejs", {
+    allMembers,
+    footMembersCount,
+    marcheMembersCount,
   });
 });
 
@@ -64,7 +81,7 @@ app.get("/login", unprotected, async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.redirect("/");
+  res.redirect("/marche");
 });
 
 app.post("/ajouter/nv", protected, async (req, res) => {
@@ -73,7 +90,7 @@ app.post("/ajouter/nv", protected, async (req, res) => {
     payed: joi.number().required(),
   });
   const { error } = schemaVerify.validate(req.body);
-  if (error) return res.status(500).redirect("/");
+  if (error) return res.status(500).redirect("/marche");
   const newMember = new marcheMembers({
     name: req.body.name,
     payed: req.body.payed,
@@ -82,12 +99,33 @@ app.post("/ajouter/nv", protected, async (req, res) => {
     ),
   });
   await newMember.save();
-  res.redirect("/");
+  res.redirect("/marche");
+});
+
+app.post("/ajouter/foot/nv", protected, async (req, res) => {
+  const schemaVerify = joi.object({
+    name: joi.string().required(),
+    payed: joi.number().required(),
+  });
+  const { error } = schemaVerify.validate(req.body);
+  if (error) return res.status(500).redirect("/foot");
+  const newMember = new footMembers({
+    name: req.body.name,
+    payed: req.body.payed,
+    subscribtion: new Date(+new Date() + 30 * 3 * 24 * 60 * 60 * 1000),
+  });
+  await newMember.save();
+  res.redirect("/foot");
 });
 
 app.post("/membre/:id/supprimer", async (req, res) => {
   await marcheMembers.findByIdAndDelete(req.params.id);
-  res.redirect("/");
+  res.redirect("/marche");
+});
+
+app.post("/membre/foot/:id/supprimer", async (req, res) => {
+  await footMembers.findByIdAndDelete(req.params.id);
+  res.redirect("/foot");
 });
 
 app.post("/login/n", unprotected, (req, res) => {
@@ -100,7 +138,7 @@ app.post("/login/n", unprotected, (req, res) => {
   if (req.body.username !== "saydia" || req.body.password !== "walkfoot2020")
     return res.status(403).redirect("/login");
   req.session.user = { isSigned: true };
-  res.redirect("/");
+  res.redirect("/marche");
 });
 
 app.listen(process.env.PORT || 3001, () => {

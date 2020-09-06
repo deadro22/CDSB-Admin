@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./FontAwesome/css/all.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="cds_main">
+      <section>
+        <div class="fore-el">
+          <h2>Saydia Sidi Bou Said - Admin</h2>
+        </div>
+        <%- include('navbar') %>
+        <div class="fore-el aj_mem">
+          <h2>Ajouter Un Membre</h2>
+          <form action="/ajouter/foot/nv" method="POST" class="aj_mem_frm">
+            <div class="aj_mem_inp">
+              <input
+                type="text"
+                placeholder="Nom Prenom"
+                name="name"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="aj_mem_inp">
+              <input type="number" placeholder="XX DT" name="payed" required />
+            </div>
+            <div class="aj_mem_inp_sub" id="ss_btn_res">
+              <input
+                class="btn_cds btn-regular"
+                type="submit"
+                value="ajouter"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="fore-el">
+          <table class="tb_fore" id="dev-table">
+            <thead>
+              <tr class="bb_tr">
+                <th>#</th>
+                <th>Nom Prenom</th>
+                <th>Payement</th>
+                <th>Date</th>
+                <th>Supprimer</th>
+              </tr>
+            </thead>
+
+            <tbody id="q-table">
+              <%allMembers.forEach(function(member,index){%>
+              <tr>
+                <td><%=index+1%></td>
+                <td><%=member.name%></td>
+                <td><%=member.payed%> DT</td>
+                <td><%=member.subscribtion.toDateString()%></td>
+                <td>
+                  <form
+                    action="/membre/foot/<%=member._id%>/supprimer"
+                    method="POST"
+                  >
+                    <input
+                      type="submit"
+                      value="supprimer"
+                      class="btn_cds btn-alert"
+                    />
+                  </form>
+                </td>
+              </tr>
+              <%})%>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

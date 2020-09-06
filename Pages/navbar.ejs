@@ -1,13 +1,18 @@
 <link rel="stylesheet" href="./navbar.css" />
 <nav class="fore-el">
   <div class="nv_bt_icon">
-    <button>
+    <button onclick="navigate('/marche')">
       <i class="fa fa-running"></i>
-      <p><%= allMembers.length %> Membre(s)</p>
+      <p><%= marcheMembersCount %> Membre(s)</p>
     </button>
-    <button>
+    <button onclick="navigate('/foot')">
       <i class="fa fa-futbol"></i>
-      <p>0 Membre(s)</p>
+      <p><%= footMembersCount %> Membre(s)</p>
     </button>
   </div>
+  <script>
+    function navigate(location) {
+      window.location.href = location;
+    }
+  </script>
 </nav>
