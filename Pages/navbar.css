@@ -1,0 +1,32 @@
+.nv_bt_icon {
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 600px) {
+  .nv_bt_icon > button > i {
+    font-size: 40px;
+  }
+  .nv_bt_icon > button > p {
+    font-size: 15px !important;
+  }
+}
+.nv_bt_icon > button {
+  font-size: 35px;
+  color: white;
+  padding: 0.5em;
+  margin: 0.1em 0.3em;
+  border-radius: 5px;
+  height: 100px;
+  width: 100%;
+  max-width: 200px;
+  background-color: rgb(126, 124, 238);
+  outline: none;
+  border: none;
+}
+.nv_bt_icon > button:hover {
+  background-color: rgba(126, 124, 238, 0.849);
+  cursor: pointer;
+}
+.nv_bt_icon > button > p {
+  font-size: 18px;
+}

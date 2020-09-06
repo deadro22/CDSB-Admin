@@ -10,9 +10,13 @@ app.use(express.static(__dirname + "/Pages"));
 app.use(
   session({
     secret: "1xFaz54fgagz5151azfg",
-    saveUninitialized: true,
-    resave: false,
+    resave: true,
+    saveUninitialized: false,
     name: "CSD_CID",
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    },
   })
 );
 
@@ -34,16 +38,25 @@ mongoose.connect(
   }
 );
 
-const member = new mongoose.Schema({
+const marcheMember = new mongoose.Schema({
   name: { type: String, required: true },
   payed: { type: Number, required: true, default: 0 },
   subscribtion: { type: Date, required: true },
 });
-const members = mongoose.model("members", member);
+const marcheMembers = mongoose.model("marche Members", marcheMember);
 
-app.get(["/", "/home"], protected, async (req, res) => {
-  const allMembers = await members.find();
-  res.render(__dirname + "/Pages/home.ejs", { allMembers });
+const footMember = new mongoose.Schema({
+  name: { type: String, required: true },
+  payed: { type: Number, required: true, default: 0 },
+  subscribtion: { type: Date, required: true },
+});
+const footMembers = mongoose.model("foot Members", footMember);
+
+app.get("/", protected, async (req, res) => {
+  const allMembers = await marcheMembers.find();
+  res.render(__dirname + "/Pages/home.ejs", {
+    allMembers,
+  });
 });
 
 app.get("/login", unprotected, async (req, res) => {
@@ -61,7 +74,7 @@ app.post("/ajouter/nv", protected, async (req, res) => {
   });
   const { error } = schemaVerify.validate(req.body);
   if (error) return res.status(500).redirect("/");
-  const newMember = new members({
+  const newMember = new marcheMembers({
     name: req.body.name,
     payed: req.body.payed,
     subscribtion: new Date(
@@ -73,7 +86,7 @@ app.post("/ajouter/nv", protected, async (req, res) => {
 });
 
 app.post("/membre/:id/supprimer", async (req, res) => {
-  await members.findByIdAndDelete(req.params.id);
+  await marcheMembers.findByIdAndDelete(req.params.id);
   res.redirect("/");
 });
 
