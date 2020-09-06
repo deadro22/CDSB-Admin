@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto Condensed", sans-serif;
+      }
+      body {
+        background-color: #fcf9ff;
+      }
+      @media screen and (max-width: 600px) {
+        * {
+          font-size: 15px;
+        }
+        .fore-el {
+          margin: 1em 0em !important;
+        }
+        th:first-child,
+        td:first-child {
+          display: none;
+        }
+        #ss_btn_res {
+          width: 70px;
+        }
+      }
+      .fore-el {
+        margin: 1em;
+        padding: 1em;
+        background-color: white;
+        font-size: 17px;
+        box-shadow: 2px 2px 3px rgba(126, 124, 238, 0.383);
+        border-radius: 5px;
+      }
+      section {
+        width: 100%;
+        max-width: 1000px;
+      }
+      .aj_mem_frm {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .aj_mem_inp,
+      .aj_mem_inp_sub {
+        margin-right: 1em;
+        margin-top: 1em;
+      }
+      .aj_mem_inp_sub {
+        width: 100%;
+        max-width: 150px;
+      }
+      .aj_mem_inp_sub > input {
+        width: 100%;
+        max-width: 150px;
+      }
+      .aj_mem_inp {
+        width: 100%;
+        max-width: 200px;
+      }
+      .aj_mem_inp > input {
+        width: 100%;
+        max-width: 200px;
+        height: 35px;
+        padding: 0.5em;
+        font-size: 17px;
+        border: none;
+        border-bottom: 2px solid rgba(126, 124, 238, 0.719);
+        outline: none;
+      }
+      .cds_main {
+        display: flex;
+        justify-content: center;
+      }
+      .mem_elem {
+        display: flex;
+        justify-content: space-between;
+        margin: 0.5em 0em;
+      }
+      table {
+        width: 100%;
+        table-layout: fixed;
+        overflow-wrap: break-word;
+        text-align: left;
+        border-collapse: collapse;
+      }
+      tr {
+        height: 50px;
+        border-bottom: 2px solid rgba(126, 124, 238, 0.39);
+      }
+      .btn_cds {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: white;
+        border-radius: 5px;
+        padding: 0.4em;
+        font-size: 17px;
+      }
+      .btn-alert {
+        background-color: rgb(235, 57, 57);
+      }
+      .btn-regular {
+        background-color: rgb(126, 124, 238);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="cds_main">
+      <section>
+        <div class="fore-el">
+          <h2>Club De Marche Sidi Bou Said - Admin</h2>
+        </div>
+        <div class="fore-el aj_mem">
+          <h2>Me Connecter</h2>
+          <form action="/login/n" method="POST" class="aj_mem_frm">
+            <div class="aj_mem_inp">
+              <input
+                type="text"
+                placeholder="Nom d'utilisateur"
+                name="username"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="aj_mem_inp">
+              <input
+                type="password"
+                placeholder="Mot de pass"
+                name="password"
+                required
+              />
+            </div>
+            <div class="aj_mem_inp_sub" id="ss_btn_res">
+              <input
+                class="btn_cds btn-regular"
+                type="submit"
+                value="s'identifier"
+              />
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
