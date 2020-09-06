@@ -50,6 +50,10 @@ app.get("/login", unprotected, async (req, res) => {
   res.render(__dirname + "/Pages/login.ejs");
 });
 
+app.get("*", (req, res) => {
+  res.redirect("/");
+});
+
 app.post("/ajouter/nv", protected, async (req, res) => {
   const schemaVerify = joi.object({
     name: joi.string().required(),
